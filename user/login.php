@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $_SESSION['admin_name'] = $user['name'];
                             $_SESSION['admin_id'] = $user['user_id'];
                             ob_end_clean();
-                            header("Location: ../admin/manageproducts.php");
+                            header("Location: ../index.php");
                             exit();
                         } else {
                             // Customer login

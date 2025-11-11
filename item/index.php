@@ -1,11 +1,16 @@
 <?php
 require_once __DIR__ . '/../includes/config.php';
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
-if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','asst_admin','staff'], true)) {
-    header('Location: ../user/login.php');
+if (session_status() === PHP_SESSION_NONE) { 
+    session_start(); 
+}
+
+// Redirect to login if not authorized
+if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin','asst_admin','staff'], true)) {
+    header('Location: ' . $baseUrl . '/user/login.php');
     exit;
 }
-$pageCss = 'admin.css';
+
+$pageCss = $baseUrl . '/includes/style/admin.css';
 include __DIR__ . '/../includes/header.php';
 ?>
 
@@ -14,7 +19,7 @@ include __DIR__ . '/../includes/header.php';
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
         <h1 style="margin:0;">Manage Items</h1>
-        <a href="create.php" style="padding:10px 14px;background:#7a1530;color:#fff;text-decoration:none;border-radius:6px;">+ Add Item</a>
+        <a href="{$baseUrl}/item/create.php" style="padding:10px 14px;background:#7a1530;color:#fff;text-decoration:none;border-radius:6px;">+ Add Item</a>
     </div>
 
     <?php
@@ -73,8 +78,8 @@ include __DIR__ . '/../includes/header.php';
                             <?= $row['is_available'] ? 'Yes' : 'No' ?>
                         </td>
                         <td style="padding:10px;border-bottom:1px solid #f0f0f0;white-space:nowrap;">
-                            <a href="edit.php?id=<?= (int)$row['product_id'] ?>" style="margin-right:8px;">Edit</a>
-                            <a href="delete.php?id=<?= (int)$row['product_id'] ?>" onclick="return confirm('Delete this item?');" style="color:#b00020;">Delete</a>
+                            <a href="<?= $baseUrl ?>/item/edit.php?id=<?= (int)$row['product_id'] ?>" style="margin-right:8px;">Edit</a>
+                        <a href="<?= $baseUrl ?>/item/delete.php?id=<?= (int)$row['product_id'] ?>" onclick="return confirm('Delete this item?');" style="color:#b00020;">Delete</a>
                         </td>
                     </tr>
                 <?php endwhile; ?>

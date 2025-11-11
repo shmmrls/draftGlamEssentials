@@ -28,17 +28,17 @@ if ($productId <= 0) {
 
 // Resolve logged in user and customer
 $user_id = 0;
-if (!empty($_SESSION['user_id'])) { $user_id = (int)$_SESSION['user_id']; }
-elseif (!empty($_SESSION['user_id'])) { $user_id = (int)$_SESSION['user_id']; }
+if (!empty($_SESSION['user_id'])) { 
+    $user_id = (int)$_SESSION['user_id'];
+}
 $customerId = 0;
 if ($user_id) {
-  $stmt = mysqli_prepare($conn, 'SELECT customer_id, fname, lname FROM customers WHERE user_id = ? LIMIT 1');
+  $stmt = mysqli_prepare($conn, 'SELECT customer_id, fullname FROM customers WHERE user_id = ? LIMIT 1');
   mysqli_stmt_bind_param($stmt, 'i', $user_id);
   mysqli_stmt_execute($stmt);
   $res = mysqli_stmt_get_result($stmt);
   if ($res && $row = mysqli_fetch_assoc($res)) {
     $customerId = (int)$row['customer_id'];
-    $customerName = trim(($row['fname'] ?? '') . ' ' . ($row['lname'] ?? ''));
   }
   mysqli_stmt_close($stmt);
 }
@@ -107,7 +107,7 @@ if ($q) { $r = $q->fetch_assoc(); $avg_rating = $r['avg_rating'] ? number_format
 
 // Reviews list
 $reviews = [];
-$stmt = mysqli_prepare($conn, 'SELECT r.review_id, r.rating, r.review_text, r.created_at, c.fname, c.lname
+$stmt = mysqli_prepare($conn, 'SELECT r.review_id, r.rating, r.review_text, r.created_at, c.fullname
   FROM reviews r JOIN customers c ON c.customer_id = r.customer_id
   WHERE r.product_id = ? ORDER BY r.created_at DESC');
 mysqli_stmt_bind_param($stmt, 'i', $productId);
@@ -181,7 +181,7 @@ include __DIR__ . '/includes/header.php';
     <?php if (!$reviews): ?>
       <p class="muted">No reviews yet. Be the first to review this product.</p>
     <?php else: ?>
-      <?php foreach ($reviews as $rv): $name = trim(($rv['fname'] ?? '').' '.($rv['lname'] ?? '')); ?>
+      <?php foreach ($reviews as $rv): $name = $rv['fullname'] ?? 'Customer';?>
         <div class="rev-item">
           <div class="rating"><?php echo (int)$rv['rating']; ?> ⭐ <span class="muted" style="font-weight:400;margin-left:6px;">by <?php echo htmlspecialchars($name ?: 'Customer'); ?> • <?php echo htmlspecialchars($rv['created_at']); ?></span></div>
           <?php if (!empty($rv['review_text'])): ?><div><?php echo nl2br(htmlspecialchars(mask_bad_words($rv['review_text']))); ?></div><?php endif; ?>
@@ -203,7 +203,7 @@ include __DIR__ . '/includes/header.php';
           <textarea id="review_text" name="review_text" placeholder="Share your thoughts..."><?php echo $userReview ? htmlspecialchars(mask_bad_words($userReview['review_text'])) : ''; ?></textarea>
           <br>
           <button class="btn" type="submit" name="review_submit"><?php echo $userReview ? 'Update Review' : 'Submit Review'; ?></button>
-          <?php if (!$customerName ?? false): ?><div class="muted" style="margin-top:8px;">Your review will appear with your profile name.</div><?php endif; ?>
+         <?php if (empty($row['fullname'])): ?><div class="muted" style="margin-top:8px;">Your review will appear with your profile name.</div><?php endif; ?>
         </form>
       </div>
     <?php else: ?>

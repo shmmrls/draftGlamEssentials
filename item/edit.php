@@ -1,9 +1,12 @@
 <?php
 require_once __DIR__ . '/../includes/config.php';
-if (session_status() === PHP_SESSION_NONE) { session_start(); }
-if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin','asst_admin','staff'], true)) {
-    $_SESSION['error'] = 'Unauthorized.';
-    header('Location: ../user/login.php');
+if (session_status() === PHP_SESSION_NONE) { 
+    session_start(); 
+}
+
+// Redirect to login if not authorized
+if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin','asst_admin','staff'], true)) {
+    header('Location: ' . $baseUrl . '/user/login.php');
     exit;
 }
 

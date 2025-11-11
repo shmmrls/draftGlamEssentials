@@ -12,4 +12,9 @@ mysqli_set_charset($conn, 'utf8mb4');
 
 // In includes/config.php
 $baseUrl = 'http://' . $_SERVER['HTTP_HOST'] . '/draftGlamEssentials';
+
+    // // In config.php
+    // if (session_status() === PHP_SESSION_NONE) {
+    //     session_start();
+    // }
 ?>

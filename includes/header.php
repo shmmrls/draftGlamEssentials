@@ -50,7 +50,7 @@ if (!isset($baseUrl)) {
             <ul class="main-nav">
                 <!-- Common links for everyone -->
                 <li><a href="<?= htmlspecialchars($baseUrl) ?>/index.php" class="nav-link">Home</a></li>
-                <li><a href="<?= htmlspecialchars($baseUrl) ?>/products.php" class="nav-link">Products</a></li>
+                <li><a href="<?= htmlspecialchars($baseUrl) ?>/product-list.php" class="nav-link">Products</a></li>
                 <li><a href="<?= htmlspecialchars($baseUrl) ?>/about.php" class="nav-link">About</a></li>
                 <li><a href="<?= htmlspecialchars($baseUrl) ?>/faq.php" class="nav-link">FAQ</a></li>
                 <!-- <li><a href="<?= htmlspecialchars($baseUrl) ?>/user/login.php" class="nav-link">Login/Register</a></li> -->
@@ -62,7 +62,7 @@ if (!isset($baseUrl)) {
                             <a href="#" class="nav-link">Admin Panel</a>
                             <div class="dropdown-menu">
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/dashboard.php">Dashboard</a>
-                                <a href="<?= htmlspecialchars($baseUrl) ?>/admin/products.php">Manage Products</a>
+                                <a href="<?= htmlspecialchars($baseUrl) ?>/item/index.php">Manage Products</a>
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/categories.php">Manage Categories</a>
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/users.php">Manage Users</a>
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/orders.php">Manage Orders</a>

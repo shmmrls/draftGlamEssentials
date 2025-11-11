@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2025 at 06:03 AM
+-- Generation Time: Nov 10, 2025 at 06:11 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,10 +38,10 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `img_name`) VALUES
-(1, 'Hair Care', NULL),
-(2, 'Skincare', NULL),
-(3, 'Salon Tools & Accessories', NULL),
-(4, 'Nail & Body Care', NULL);
+(1, 'Hair Care', 'hair_care'),
+(2, 'Skincare', 'skincare'),
+(3, 'Salon Tools & Accessories', 'salon_tools'),
+(4, 'Nail & Body Care', 'nail_body_care');
 
 -- --------------------------------------------------------
 
@@ -67,16 +67,20 @@ CREATE TABLE `contact_inquiries` (
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,
   `title` char(4) DEFAULT NULL,
-  `fname` varchar(32) DEFAULT NULL,
-  `lname` varchar(32) NOT NULL,
+  `fullname` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `contact_no` varchar(20) DEFAULT NULL,
-  `addressline` varchar(64) DEFAULT NULL,
-  `town` varchar(32) DEFAULT NULL,
   `zipcode` char(10) DEFAULT NULL,
-  `phone` varchar(16) DEFAULT NULL,
+  `town` varchar(255) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `title`, `fullname`, `address`, `contact_no`, `zipcode`, `town`, `user_id`) VALUES
+(4, 'Mrs.', 'Trisha Mia Morales', '', '', '', '', 14);
 
 -- --------------------------------------------------------
 
@@ -182,14 +186,6 @@ CREATE TABLE `order_items` (
 -- (See below for the actual view)
 --
 CREATE TABLE `order_summary` (
-`order_id` int(11)
-,`transaction_id` varchar(50)
-,`customer_fname` varchar(32)
-,`customer_lname` varchar(32)
-,`payment_status` enum('Pending','Paid','Refunded')
-,`order_status` enum('Pending','Shipped','Delivered','Cancelled')
-,`total_amount` decimal(10,2)
-,`order_date` timestamp
 );
 
 -- --------------------------------------------------------
@@ -199,19 +195,6 @@ CREATE TABLE `order_summary` (
 -- (See below for the actual view)
 --
 CREATE TABLE `order_transaction_details` (
-`order_id` int(11)
-,`transaction_id` varchar(50)
-,`customer_id` int(11)
-,`fname` varchar(32)
-,`lname` varchar(32)
-,`product_name` varchar(150)
-,`quantity` int(11)
-,`price` decimal(10,2)
-,`subtotal` decimal(10,2)
-,`total_amount` decimal(10,2)
-,`order_status` enum('Pending','Shipped','Delivered','Cancelled')
-,`payment_status` enum('Pending','Paid','Refunded')
-,`order_date` timestamp
 );
 
 -- --------------------------------------------------------
@@ -413,7 +396,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `name`, `email`, `password`, `img_name`, `is_active`, `last_login`, `role`, `created_at`) VALUES
-(1, 'Trisha Mia Morales', 'moralestrishamia@gmail.com', '$2y$10$SbIdMO2HPMcDs8Mz7Cpns.TeXvhVDssEVpUeUAeAF4Hg405luBD5a', NULL, 1, NULL, 'customer', '2025-11-10 04:24:46');
+(12, 'Shu Yamino', 'shuyamino@gmail.com', '$2y$10$mRwQvvZR1eLFFsL4JzggSOVEuW9ewrazkd8d9UVi/iysx1e8MFS4K', NULL, 1, '2025-11-10 17:26:26', 'customer', '2025-11-10 09:26:20'),
+(13, 'Ike Eveland', 'ikeeveland@gmail.com', '$2y$10$X5he2.XWW5X8A1K1iaA0NewxiCno87PH5LimJaoMVPrvYn0brcEiO', 'user_13_1762767091.png', 1, '2025-11-11 01:09:27', 'customer', '2025-11-10 09:30:01'),
+(14, 'Trisha Mia Morales', 'moralestrishamia@gmail.com', '$2y$10$QjlUZLRVPE8b0a6GNS87V.P3z4jrc.q82AdbOzgAnN8s2OJKra/MW', 'user_14_1762794234.png', 1, '2025-11-11 00:58:34', 'customer', '2025-11-10 09:32:17'),
+(15, 'shami', 'shami@mail.com', '$2y$10$wi5WcYo7ymVsLGwsUopQNOXs84OIXxdkZ/THPcv5LgbAov9M/sn/u', 'nopfp.jpg', 1, '2025-11-10 23:37:15', 'customer', '2025-11-10 09:37:03');
 
 -- --------------------------------------------------------
 
@@ -545,7 +531,7 @@ ALTER TABLE `contact_inquiries`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -593,7 +579,7 @@ ALTER TABLE `shopping_cart`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
