@@ -67,7 +67,6 @@ if (!isset($baseUrl)) {
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/users.php">Manage Users</a>
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/orders.php">Manage Orders</a>
                                 <a href="<?= htmlspecialchars($baseUrl) ?>/admin/reviews.php">Manage Reviews</a>
-                                <a href="<?= htmlspecialchars($baseUrl) ?>/admin/inventory.php">Inventory</a>
                             </div>
                         </li>
                         <!-- <li class="mobile-only-nav-item">
