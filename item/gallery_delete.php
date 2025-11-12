@@ -9,6 +9,8 @@ if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin'
     header('Location: ' . $baseUrl . '/user/login.php');
     exit;
 }
+$pageCss = 'admin.css';
+include __DIR__ . '/../includes/adminHeader.php';
 
 $pid = isset($_GET['pid']) ? (int)$_GET['pid'] : 0;
 $imgId = isset($_GET['img_id']) ? (int)$_GET['img_id'] : 0;

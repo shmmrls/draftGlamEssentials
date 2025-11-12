@@ -10,7 +10,7 @@ if (isset($_SESSION['user_id'])) {
     // Check user role
     if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
         ob_end_clean();
-        header("Location: ../index.php");
+        header("Location: ../admin/dashboard.php");
         exit();
     } else {
         ob_end_clean();
@@ -95,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $_SESSION['admin_name'] = $user['name'];
                             $_SESSION['admin_id'] = $user['user_id'];
                             ob_end_clean();
-                            header("Location: ../index.php");
+                            header("Location: ../admin/dashboard.php");
                             exit();
                         } else {
                             // Customer login
@@ -301,6 +301,7 @@ require_once('../includes/header.php');
         </div>
     </div>
 </section>
+
 
 <style>
 .luxury-auth-section {

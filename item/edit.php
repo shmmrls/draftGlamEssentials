@@ -34,7 +34,7 @@ if (!$product) {
 $cats = mysqli_query($conn, "SELECT category_id, category_name FROM categories ORDER BY category_name");
 
 $pageCss = '';
-include __DIR__ . '/../includes/header.php';
+include __DIR__ . '/../includes/adminHeader.php';
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">

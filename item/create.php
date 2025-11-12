@@ -9,8 +9,8 @@ if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin'
     header('Location: ' . $baseUrl . '/user/login.php');
     exit;
 }
-$pageCss = 'admin.css';
-include __DIR__ . '/../includes/header.php';
+$pageCss = $baseUrl . '/admin/includes/style/admin.css';
+include __DIR__ . '/../includes/adminHeader.php';
 
 $cats = mysqli_query($conn, "SELECT category_id, category_name FROM categories ORDER BY category_name");
 ?>

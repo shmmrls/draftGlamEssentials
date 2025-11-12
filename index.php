@@ -218,7 +218,7 @@ if (isset($_SESSION["cart_products"]) && count($_SESSION["cart_products"]) > 0) 
   <div class="who-text">
     <h3>Who Are We</h3>
     <h1>Your New Go-to for<br>Salon Essentials</h1>
-    <p>Essential Salon Supplies is your trusted local destination for professional hair and beauty products. With everything in stock, we offer fast, reliable island-wide delivery straight to your door.</p>
+    <p>GlamEssentials Salon Supplies is your trusted local destination for professional hair and beauty products. With everything in stock, we offer fast, reliable island-wide delivery straight to your door.</p>
     <a href="#products" class="shop-btn">Shop Now</a>
   </div>
 

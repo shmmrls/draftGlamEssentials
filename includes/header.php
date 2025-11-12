@@ -27,7 +27,7 @@ if (!isset($baseUrl)) {
 </head>
 <body>
 
-<!-- 🌸 Top Banner -->
+<!--    🌸 Top Banner -->
 <div class="top-banner">
     <div class="banner-content">
         <span class="banner-text">SIGN UP NOW TO START SHOPPING</span>

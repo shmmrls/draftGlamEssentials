@@ -128,7 +128,7 @@ $recent_reviews_stmt->execute();
 $recent_reviews = $recent_reviews_stmt->get_result();
 $recent_reviews_stmt->close();
 
-require_once('../includes/header.php');
+require_once('../includes/adminHeader.php');
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -227,7 +227,7 @@ require_once('../includes/header.php');
         <div class="quick-actions">
             <h2 class="section-title">Quick Actions</h2>
             <div class="actions-grid">
-                <a href="products.php" class="action-card">
+                <a href="../item/index.php" class="action-card">
                     <div class="action-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/>
@@ -245,7 +245,7 @@ require_once('../includes/header.php');
                     <div class="action-label">View Orders</div>
                 </a>
 
-                <a href="users.php" class="action-card">
+                <a href="users/ind_users.php" class="action-card">
                     <div class="action-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
@@ -263,7 +263,7 @@ require_once('../includes/header.php');
                     <div class="action-label">Check Inventory</div>
                 </a>
 
-                <a href="categories.php" class="action-card">
+                <a href="categories/ind_categories.php" class="action-card">
                     <div class="action-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
@@ -282,7 +282,7 @@ require_once('../includes/header.php');
                 </a>
 
                 <?php if ($user_data['role'] === 'admin'): ?>
-                <a href="add_admin.php" class="action-card action-card-highlight">
+                <a href="add_admin.php" class="action-card">
                     <div class="action-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/>

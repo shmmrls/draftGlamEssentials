@@ -171,4 +171,20 @@
   if (window.innerWidth <= 768) {
     closeMenu();
   }
+
+  // 🌸 Auto-hide banner after successful login
+document.addEventListener('DOMContentLoaded', () => {
+  const banner = document.getElementById('topBanner');
+  if (!banner) return;
+
+  // Simulate "login detection" — if PHP session is set later
+  // you can trigger this manually after login AJAX or redirect
+  const isLoggedIn = sessionStorage.getItem('userLoggedIn') === 'true';
+  
+  if (isLoggedIn) {
+    banner.classList.add('fade-out');
+    setTimeout(() => banner.remove(), 600);
+  }
+});
+
 })();

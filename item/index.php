@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_role']) || !in_array($_SESSION['user_role'], ['admin'
 }
 
 $pageCss = $baseUrl . '/includes/style/admin.css';
-include __DIR__ . '/../includes/header.php';
+include __DIR__ . '/../includes/adminHeader.php';
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
