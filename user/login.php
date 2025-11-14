@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             if (!empty($redirect_url)) {
                                 header("Location: ../" . $redirect_url);
                             } else {
-                                header("Location: ../index.php");
+                                header("Location: ../customer/index.php");
                             }
                             exit();
                         }

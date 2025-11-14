@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/includes/config.php';
+require_once __DIR__ . '/../includes/config.php';
 // Get base URL
 $baseUrl = rtrim($baseUrl ?? '', '/');
 if (session_status() === PHP_SESSION_NONE) { session_start(); }
@@ -128,7 +128,7 @@ if (!$product) { header('Location: ' . $baseUrl . '/index.php'); exit; }
 $main_img = $baseUrl . '/assets/default.png';
 $imgName = $product['main_img_name'] ?? '';
 if (!empty($imgName)) {
-    $productImagesDir = __DIR__ . '/item/products/';
+    $productImagesDir = __DIR__ . '/../item/products/';
     $extensions = ['.jpg', '.png', '.webp'];
     foreach ($extensions as $ext) {
         $fullPath = $productImagesDir . $imgName . $ext;
@@ -149,7 +149,7 @@ if ($res) {
     while ($img = mysqli_fetch_assoc($res)) {
         $imgPath = null;
         foreach (['.jpg', '.png', '.webp'] as $ext) {
-            $fullPath = __DIR__ . '/item/product_images/' . $img['img_name'] . $ext;
+            $fullPath = __DIR__ . '/../item/product_images/' . $img['img_name'] . $ext;
             if (file_exists($fullPath)) {
                 $imgPath = $baseUrl . '/item/product_images/' . $img['img_name'] . $ext;
                 break;
@@ -209,7 +209,7 @@ if ($res && $row = mysqli_fetch_assoc($res)) {
 mysqli_stmt_close($stmt);
 
 $pageCss = '';
-include __DIR__ . '/includes/header.php';
+include __DIR__ . '/../includes/customerHeader.php';
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -317,10 +317,10 @@ include __DIR__ . '/includes/header.php';
                 <!-- Add to Cart Form (Hide for admin) -->
                 <?php if (empty($_SESSION['role']) || $_SESSION['role'] !== 'admin'): ?>
                 <?php if ($in_stock): ?>
-                <form method="POST" action="<?php echo $baseUrl; ?>/cart/cart_update.php" class="add-to-cart-form">
+                <form method="POST" action="cart/cart_update.php" class="add-to-cart-form">
                     <input type="hidden" name="item_id" value="<?php echo (int)$productId; ?>">
                     <input type="hidden" name="type" value="add">
-                    <input type="hidden" name="redirect" value="<?php echo $baseUrl; ?>/cart/view_cart.php">
+                    <input type="hidden" name="redirect" value="cart/view_cart.php">
                     
                     <div class="quantity-selector">
                         <label for="quantity">Quantity</label>
@@ -1269,4 +1269,4 @@ document.getElementById('review_text')?.addEventListener('input', function() {
 });
 </script>
 
-<?php include __DIR__ . '/includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

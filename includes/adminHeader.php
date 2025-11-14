@@ -59,7 +59,7 @@ if (!isset($baseUrl)) {
                         <a href="<?= htmlspecialchars($baseUrl) ?>/admin/categories/ind_categories.php">Categories</a>
                         <a href="<?= htmlspecialchars($baseUrl) ?>/admin/users/ind_users.php">Users</a>
                         <a href="<?= htmlspecialchars($baseUrl) ?>/admin/orders.php">Orders</a>
-                        <a href="<?= htmlspecialchars($baseUrl) ?>/admin/reviews.php">Reviews</a>
+                        <a href="<?= htmlspecialchars($baseUrl) ?>/admin/reviews/reviews.php">Reviews</a>
                     </div>
                 </li>
             </ul>

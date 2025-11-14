@@ -118,7 +118,14 @@ $order_stats['total_spent'] = $order_stats['total_spent'] ?? 0;
 $order_stats['pending_orders'] = $order_stats['pending_orders'] ?? 0;
 $order_stats['delivered_orders'] = $order_stats['delivered_orders'] ?? 0;
 
-require_once('../includes/header.php');
+// Include appropriate header based on user role
+if (isset($user_data['role']) && $user_data['role'] === 'admin') {
+    require_once('../includes/adminHeader.php');
+} else {
+    // Default to customer header
+    $pageCss = ''; // Add this line if needed by customerHeader.php
+    require_once('../includes/customerHeader.php');
+}
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
