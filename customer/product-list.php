@@ -1,6 +1,7 @@
 <?php
 require_once dirname(__FILE__) . '/../includes/config.php';
-$pageCss = 'product-list.css';
+$baseUrl = rtrim($baseUrl ?? '', '');
+$pageCss = '<link rel="stylesheet" href="' . $baseUrl . '/customer/css/product-list.css">';
 include dirname(__FILE__) . '/../includes/customerHeader.php';
 
 // Get filter and sort parameters
@@ -204,7 +205,7 @@ $total_products = mysqli_num_rows($result);
                     }
                 ?>
                     <div class="product-card">
-                        <a href="<?php echo $baseUrl; ?>/customer/products.php?id=<?php echo $product['product_id']; ?>" class="product-link">
+                        <a href="<?php echo $baseUrl; ?>/customer/product.php?id=<?php echo $product['product_id']; ?>" class="product-link">
                             <div class="product-image-wrapper">
                                 <img src="<?php echo $imgPath; ?>" 
                                      alt="<?php echo htmlspecialchars($product['product_name']); ?>"

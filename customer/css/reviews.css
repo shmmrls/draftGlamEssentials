@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.6;
+}
+
+/* Reviews Page */
+.reviews-page {
+    min-height: 100vh;
+    padding: 100px 30px 60px;
+    background: linear-gradient(to bottom, #fafafa 0%, #ffffff 100%);
+}
+
+.reviews-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Page Header */
+.page-header {
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #0a0a0a;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+}
+
+.breadcrumb a {
+    color: rgba(0,0,0,0.6);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: #0a0a0a;
+}
+
+.breadcrumb .separator {
+    color: rgba(0,0,0,0.3);
+}
+
+/* Alerts */
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px 25px;
+    margin-bottom: 30px;
+    border-left: 3px solid;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+}
+
+.alert svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.alert-success {
+    background: #f0fdf4;
+    border-color: #166534;
+    color: #166534;
+}
+
+.alert-error {
+    background: #fef2f2;
+    border-color: #b91c1c;
+    color: #b91c1c;
+}
+
+/* Empty Reviews */
+.empty-reviews {
+    text-align: center;
+    padding: 100px 20px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+}
+
+.empty-reviews svg {
+    opacity: 0.15;
+    margin-bottom: 30px;
+}
+
+.empty-reviews h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #0a0a0a;
+}
+
+.empty-reviews p {
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 30px;
+}
+
+/* Button */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border: 1px solid;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: #0a0a0a;
+    border-color: #0a0a0a;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+/* Reviews List */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.review-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+}
+
+.review-card:hover {
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.review-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 30px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    background: #fafafa;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.product-thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid rgba(0,0,0,0.08);
+    flex-shrink: 0;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.product-name a {
+    color: #0a0a0a;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.product-name a:hover {
+    color: #555;
+}
+
+.product-price {
+    font-size: 14px;
+    color: rgba(0,0,0,0.6);
+    font-weight: 500;
+}
+
+.review-rating-display {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.rating-number {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0a0a0a;
+    margin-left: 5px;
+}
+
+.review-card-body {
+    padding: 25px 30px;
+}
+
+.review-content {
+    font-size: 14px;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.review-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.review-date,
+.review-updated {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: rgba(0,0,0,0.5);
+    letter-spacing: 0.3px;
+}
+
+.review-date svg,
+.review-updated svg {
+    flex-shrink: 0;
+    opacity: 0.6;
+}
+
+.review-updated {
+    font-style: italic;
+}
+
+.review-card-footer {
+    display: flex;
+    gap: 15px;
+    padding: 20px 30px;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    background: #fafafa;
+}
+
+.btn-edit,
+.btn-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 1px solid;
+}
+
+.btn-edit {
+    background: transparent;
+    border-color: #0a0a0a;
+    color: #0a0a0a;
+}
+
+.btn-edit:hover {
+    background: #0a0a0a;
+    color: #ffffff;
+}
+
+.btn-view {
+    background: #0a0a0a;
+    border-color: #0a0a0a;
+    color: #ffffff;
+}
+
+.btn-view:hover {
+    background: #2a2a2a;
+    border-color: #2a2a2a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .reviews-page {
+        padding: 80px 20px 50px;
+    }
+
+    .page-title {
+        font-size: 32px;
+    }
+
+    .review-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .product-info {
+        width: 100%;
+    }
+
+    .product-thumbnail {
+        width: 70px;
+        height: 70px;
+    }
+
+    .review-rating-display {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .review-card-body {
+        padding: 20px;
+    }
+
+    .review-card-footer {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .btn-edit,
+    .btn-view {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 28px;
+    }
+
+    .product-info {
+        gap: 15px;
+    }
+
+    .product-thumbnail {
+        width: 60px;
+        height: 60px;
+    }
+
+    .product-name {
+        font-size: 14px;
+    }
+
+    .product-price {
+        font-size: 13px;
+    }
+
+    .review-rating-display svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .rating-number {
+        font-size: 14px;
+    }
+
+    .review-content {
+        font-size: 13px;
+    }
+}

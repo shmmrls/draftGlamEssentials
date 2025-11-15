@@ -21,13 +21,15 @@ if (!isset($baseUrl)) {
     <title>GlamEssentials - Professional Salon Supplies</title>
     <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl) ?>/includes/style/style.css">
     <?php if (!empty($pageCss)): ?>
-        <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl) ?>/includes/style/<?= htmlspecialchars($pageCss) ?>">
+        <?= $pageCss ?>
     <?php endif; ?>
     <script src="<?= htmlspecialchars($baseUrl) ?>/script.js" defer></script>
 </head>
 <body>
 
-<!--    🌸 Top Banner -->
+<?php include __DIR__ . '/alert.php'; ?>
+
+<!--    Top Banner -->
 <div class="top-banner">
     <div class="banner-content">
         <span class="banner-text">WELCOME BACK TO GLAMESSENTIALS</span>
@@ -60,9 +62,9 @@ if (!isset($baseUrl)) {
                         <a href="#" class="nav-link">Account</a>
                         <div class="dropdown-menu">
                             <a href="<?= htmlspecialchars($baseUrl) ?>/user/profile.php">Profile</a>
-                            <a href="<?= htmlspecialchars($baseUrl) ?>/user/myorders.php">My Orders</a>
+                            <a href="<?= htmlspecialchars($baseUrl) ?>/customer/orders.php">My Orders</a>
                             <a href="<?= htmlspecialchars($baseUrl) ?>/customer/cart/view_cart.php">My Cart</a>
-                            <a href="<?= htmlspecialchars($baseUrl) ?>/user/myreviews.php">My Reviews</a>
+                            <a href="<?= htmlspecialchars($baseUrl) ?>/customer/reviews.php">My Reviews</a>
                         </div>
                     </li>
                 <?php endif; ?>
@@ -72,7 +74,7 @@ if (!isset($baseUrl)) {
         <!-- Header Actions (Desktop Only) -->
         <div class="header-actions desktop-only">
             <!-- Search Icon -->
-            <a href="<?= htmlspecialchars($baseUrl) ?>/search.php" class="icon-btn" aria-label="Search">
+            <a href="<?= htmlspecialchars($baseUrl) ?>/customer/search.php" class="icon-btn" aria-label="Search">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" 
                         d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 
@@ -147,14 +149,14 @@ if (!isset($baseUrl)) {
                         </svg>
                         <span>Profile</span>
                     </a>
-                    <a href="<?= htmlspecialchars($baseUrl) ?>/user/myorders.php" class="account-dropdown-item">
+                    <a href="<?= htmlspecialchars($baseUrl) ?>/customer/orders.php" class="account-dropdown-item">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
                             <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
                         </svg>
                         <span>My Orders</span>
                     </a>
-                    <a href="<?= htmlspecialchars($baseUrl) ?>/cart/view.php" class="account-dropdown-item">
+                    <a href="<?= htmlspecialchars($baseUrl) ?>/customer/cart/view_cart.php" class="account-dropdown-item">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="9" cy="21" r="1"/>
                             <circle cx="20" cy="21" r="1"/>
@@ -162,7 +164,7 @@ if (!isset($baseUrl)) {
                         </svg>
                         <span>My Cart</span>
                     </a>
-                    <a href="<?= htmlspecialchars($baseUrl) ?>/user/myreviews.php" class="account-dropdown-item">
+                    <a href="<?= htmlspecialchars($baseUrl) ?>/customer/reviews.php" class="account-dropdown-item">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
                         </svg>

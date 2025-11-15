@@ -1,0 +1,68 @@
+[2025-11-15 17:40:41] === EMAIL SEND REQUEST STARTED ===
+[2025-11-15 17:40:41] User ID: 12, Role: admin
+[2025-11-15 17:40:41] Input received: {"order_id":1}
+[2025-11-15 17:40:41] Processing order ID: 1
+[2025-11-15 17:40:41] Order found - Customer: Trisha Mia Morales
+[2025-11-15 17:40:41] Customer email: moralestrishamia@gmail.com
+[2025-11-15 17:40:41] Found 3 items in order
+[2025-11-15 17:40:41] Connecting to SMTP: sandbox.smtp.mailtrap.io:2525
+[2025-11-15 17:40:41] Connected to SMTP server
+[2025-11-15 17:40:41] Server greeting: 220 smtp.mailtrap.io ESMTP ready
+[2025-11-15 17:40:41] Sent EHLO command
+[2025-11-15 17:40:41] EHLO response: 250-smtp.mailtrap.io
+[2025-11-15 17:40:41] EHLO response: 250-SIZE 5242880
+[2025-11-15 17:40:41] EHLO response: 250-PIPELINING
+[2025-11-15 17:40:41] EHLO response: 250-ENHANCEDSTATUSCODES
+[2025-11-15 17:40:41] EHLO response: 250-8BITMIME
+[2025-11-15 17:40:41] EHLO response: 250-DSN
+[2025-11-15 17:40:41] EHLO response: 250-AUTH PLAIN LOGIN CRAM-MD5
+[2025-11-15 17:40:41] EHLO response: 250 STARTTLS
+[2025-11-15 17:40:41] EHLO complete
+[2025-11-15 17:40:41] AUTH LOGIN response: 334 VXNlcm5hbWU6
+[2025-11-15 17:40:42] Username response: 334 UGFzc3dvcmQ6
+[2025-11-15 17:40:42] Password response: 235 2.0.0 OK
+[2025-11-15 17:40:42] SMTP authentication successful
+[2025-11-15 17:40:42] MAIL FROM response: 250 2.1.0 Ok
+[2025-11-15 17:40:42] RCPT TO response: 250 2.1.0 Ok
+[2025-11-15 17:40:42] DATA response: 354 Go ahead
+[2025-11-15 17:40:42] Email subject: Order #1 Status Update
+[2025-11-15 17:40:43] Send response: 250 2.0.0 Ok: queued
+[2025-11-15 17:40:43] QUIT response: 221 2.0.0 Bye
+[2025-11-15 17:40:43] SUCCESS: Email sent successfully
+[2025-11-15 17:40:43] Email logged to database
+[2025-11-15 17:40:43] === EMAIL SEND REQUEST COMPLETED ===
+
+[2025-11-15 17:41:29] === EMAIL SEND REQUEST STARTED ===
+[2025-11-15 17:41:29] User ID: 12, Role: admin
+[2025-11-15 17:41:29] Input received: {"order_id":1}
+[2025-11-15 17:41:29] Processing order ID: 1
+[2025-11-15 17:41:29] Order found - Customer: Trisha Mia Morales
+[2025-11-15 17:41:29] Customer email: moralestrishamia@gmail.com
+[2025-11-15 17:41:29] Found 3 items in order
+[2025-11-15 17:41:29] Connecting to SMTP: sandbox.smtp.mailtrap.io:2525
+[2025-11-15 17:41:29] Connected to SMTP server
+[2025-11-15 17:41:29] Server greeting: 220 smtp.mailtrap.io ESMTP ready
+[2025-11-15 17:41:29] Sent EHLO command
+[2025-11-15 17:41:29] EHLO response: 250-smtp.mailtrap.io
+[2025-11-15 17:41:29] EHLO response: 250-SIZE 5242880
+[2025-11-15 17:41:29] EHLO response: 250-PIPELINING
+[2025-11-15 17:41:29] EHLO response: 250-ENHANCEDSTATUSCODES
+[2025-11-15 17:41:29] EHLO response: 250-8BITMIME
+[2025-11-15 17:41:29] EHLO response: 250-DSN
+[2025-11-15 17:41:29] EHLO response: 250-AUTH PLAIN LOGIN CRAM-MD5
+[2025-11-15 17:41:29] EHLO response: 250 STARTTLS
+[2025-11-15 17:41:29] EHLO complete
+[2025-11-15 17:41:30] AUTH LOGIN response: 334 VXNlcm5hbWU6
+[2025-11-15 17:41:30] Username response: 334 UGFzc3dvcmQ6
+[2025-11-15 17:41:30] Password response: 235 2.0.0 OK
+[2025-11-15 17:41:30] SMTP authentication successful
+[2025-11-15 17:41:30] MAIL FROM response: 250 2.1.0 Ok
+[2025-11-15 17:41:31] RCPT TO response: 250 2.1.0 Ok
+[2025-11-15 17:41:31] DATA response: 354 Go ahead
+[2025-11-15 17:41:31] Email subject: Order #1 Status Update
+[2025-11-15 17:41:31] Send response: 250 2.0.0 Ok: queued
+[2025-11-15 17:41:31] QUIT response: 221 2.0.0 Bye
+[2025-11-15 17:41:31] SUCCESS: Email sent successfully
+[2025-11-15 17:41:31] Email logged to database
+[2025-11-15 17:41:31] === EMAIL SEND REQUEST COMPLETED ===
+

@@ -30,6 +30,42 @@ if ($user_data['role'] !== 'admin') {
 $success_message = '';
 $error_message = '';
 
+// Handle email notification
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_email'])) {
+    $order_id = (int) $_POST['order_id'];
+    
+    // Fetch customer email
+    $email_check_sql = "SELECT u.email 
+                       FROM orders o
+                       LEFT JOIN customers c ON o.customer_id = c.customer_id
+                       LEFT JOIN users u ON c.user_id = u.user_id
+                       WHERE o.order_id = ?";
+    $email_check_stmt = $conn->prepare($email_check_sql);
+    $email_check_stmt->bind_param("i", $order_id);
+    $email_check_stmt->execute();
+    $email_result = $email_check_stmt->get_result();
+    $email_data = $email_result->fetch_assoc();
+    $email_check_stmt->close();
+    
+    if (!empty($email_data['email'])) {
+        // Include email sender and send notification
+        if (file_exists('email_sender.php')) {
+            require_once('email_sender.php');
+            $email_result = sendOrderEmailNotification($conn, $order_id);
+            
+            if ($email_result['success']) {
+                $success_message = "Email notification sent successfully to customer for Order #$order_id.";
+            } else {
+                $error_message = "Failed to send email: " . $email_result['message'];
+            }
+        } else {
+            $error_message = "Email sender configuration file not found.";
+        }
+    } else {
+        $error_message = "No customer email found for this order.";
+    }
+}
+
 // Handle order status update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $order_id = (int) $_POST['order_id'];
@@ -38,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     
     // Validate status values
     $valid_order_statuses = ['Pending', 'Shipped', 'Delivered', 'Cancelled'];
-    $valid_payment_statuses = ['Pending', 'Paid', 'Refunded'];
+    $valid_payment_statuses = ['Pending', 'Paid', 'Refunded', 'Cancelled'];
     
     if (in_array($new_status, $valid_order_statuses) && in_array($payment_status, $valid_payment_statuses)) {
         $update_stmt = $conn->prepare("UPDATE orders SET order_status = ?, payment_status = ? WHERE order_id = ?");
@@ -47,8 +83,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
         if ($update_stmt->execute()) {
             $success_message = "Order #$order_id status updated successfully!";
             
-            // TODO: Send email notification to customer
-            // This would integrate with Mailtrap service
+            // Automatically send email notification to customer
+            // Fetch customer email first
+            $email_check_sql = "SELECT u.email 
+                               FROM orders o
+                               LEFT JOIN customers c ON o.customer_id = c.customer_id
+                               LEFT JOIN users u ON c.user_id = u.user_id
+                               WHERE o.order_id = ?";
+            $email_check_stmt = $conn->prepare($email_check_sql);
+            $email_check_stmt->bind_param("i", $order_id);
+            $email_check_stmt->execute();
+            $email_result = $email_check_stmt->get_result();
+            $email_data = $email_result->fetch_assoc();
+            $email_check_stmt->close();
+            
+            if (!empty($email_data['email'])) {
+                // Include email sender and send notification
+                if (file_exists('email_sender.php')) {
+                    require_once('email_sender.php');
+                    $email_result = sendOrderEmailNotification($conn, $order_id);
+                    
+                    if ($email_result['success']) {
+                        $success_message .= " Email notification sent to customer.";
+                    } else {
+                        $success_message .= " (Note: Could not send email - " . $email_result['message'] . ")";
+                    }
+                } else {
+                    // Fallback: Log that email couldn't be sent
+                    $success_message .= " (Note: Email sender not configured)";
+                }
+            }
         } else {
             $error_message = "Error updating order status.";
         }
@@ -190,6 +254,7 @@ require_once('../includes/adminHeader.php');
                         <option value="Pending" <?php echo $payment_filter === 'Pending' ? 'selected' : ''; ?>>Pending</option>
                         <option value="Paid" <?php echo $payment_filter === 'Paid' ? 'selected' : ''; ?>>Paid</option>
                         <option value="Refunded" <?php echo $payment_filter === 'Refunded' ? 'selected' : ''; ?>>Refunded</option>
+                        <option value="Cancelled" <?php echo $payment_filter === 'Cancelled' ? 'selected' : ''; ?>>Cancelled</option>
                     </select>
                 </div>
 
@@ -551,6 +616,11 @@ body {
 }
 
 .badge-payment.badge-refunded {
+    background: #fee2e2;
+    color: #1e40af;
+}
+
+.badge-payment.badge-cancelled {
     background: #fee2e2;
     color: #991b1b;
 }

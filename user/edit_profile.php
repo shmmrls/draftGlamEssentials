@@ -50,8 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($file_size > 5242880) {
             $error = "Image size must be less than 5MB.";
         } else {
-			// Create upload directory if it doesn't exist (relative to this file)
-			$upload_dir = rtrim(str_replace('\\', '/', __DIR__), '/') . '/images/profile_pictures/';
+            // Create upload directory if it doesn't exist (relative to this file)
+            $upload_dir = rtrim(str_replace('\\', '/', __DIR__), '/') . '/images/profile_pictures/';
             if (!file_exists($upload_dir)) {
                 mkdir($upload_dir, 0755, true);
             }
@@ -73,9 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $old_pic_data = $old_pic_result->fetch_assoc();
                 $old_pic_stmt->close();
                 
-					if (!empty($old_pic_data['img_name'])) {
+                if (!empty($old_pic_data['img_name'])) {
                     $old_pic_full_path = $upload_dir . $old_pic_data['img_name'];
-					if (file_exists($old_pic_full_path) && $old_pic_data['img_name'] !== 'nopfp.jpg') {
+                    if (file_exists($old_pic_full_path) && $old_pic_data['img_name'] !== 'nopfp.jpg') {
                         unlink($old_pic_full_path);
                     }
                 }
@@ -117,13 +117,13 @@ $stmt->close();
 
 // Ensure default profile image is set in DB for users without one
 if (empty($current['img_name'])) {
-	$defaultImg = 'nopfp.jpg';
-	$upd = $conn->prepare("UPDATE users SET img_name = ? WHERE user_id = ?");
-	$upd->bind_param("si", $defaultImg, $user_id);
-	if ($upd->execute()) {
-		$current['img_name'] = $defaultImg;
-	}
-	$upd->close();
+    $defaultImg = 'nopfp.jpg';
+    $upd = $conn->prepare("UPDATE users SET img_name = ? WHERE user_id = ?");
+    $upd->bind_param("si", $defaultImg, $user_id);
+    if ($upd->execute()) {
+        $current['img_name'] = $defaultImg;
+    }
+    $upd->close();
 }
 
 // Check if user has customer details
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $error === '') {
     }
 }
 
-require_once('../includes/header.php');
+require_once('../includes/customerHeader.php');
 ?>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -179,6 +179,15 @@ require_once('../includes/header.php');
             </div>
         <?php endif; ?>
 
+        <?php if (!empty($_SESSION['error_message'])): ?>
+            <div class="alert alert-error">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+                </svg>
+                <span><?php echo htmlspecialchars($_SESSION['error_message']); unset($_SESSION['error_message']); ?></span>
+            </div>
+        <?php endif; ?>
+
         <?php if ($success): ?>
             <div class="alert alert-success">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -193,17 +202,17 @@ require_once('../includes/header.php');
             <div class="current-avatar-section">
                 <div class="avatar-preview">
                     <?php 
-					if (!empty($current['img_name'])) {
-						$current_pic = htmlspecialchars($baseUrl) . '/user/images/profile_pictures/' . $current['img_name'];
+                    if (!empty($current['img_name'])) {
+                        $current_pic = htmlspecialchars($baseUrl) . '/user/images/profile_pictures/' . $current['img_name'];
                     } else {
-						$current_pic = htmlspecialchars($baseUrl) . '/user/images/profile_pictures/nopfp.jpg';
+                        $current_pic = htmlspecialchars($baseUrl) . '/user/images/profile_pictures/nopfp.jpg';
                     }
                     ?>
                     <img src="<?php echo htmlspecialchars($current_pic); ?>" 
                          alt="Current Profile Picture" 
                          class="current-avatar"
                          id="avatarPreview"
-						 onerror="this.src='<?php echo htmlspecialchars($baseUrl); ?>/user/images/profile_pictures/nopfp.jpg';">
+                         onerror="this.src='<?php echo htmlspecialchars($baseUrl); ?>/user/images/profile_pictures/nopfp.jpg';">
                 </div>
                 <div class="avatar-info">
                     <h3 class="avatar-name"><?php echo htmlspecialchars($current['name']); ?></h3>

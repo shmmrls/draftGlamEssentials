@@ -21,7 +21,7 @@ if (!isset($baseUrl)) {
     <title>GlamEssentials - Admin Panel</title>
     <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl) ?>/includes/style/style.css">
     <?php if (!empty($pageCss)): ?>
-        <link rel="stylesheet" href="<?= htmlspecialchars($baseUrl) ?>/includes/style/<?= htmlspecialchars($pageCss) ?>">
+        <link rel="stylesheet" href="<?= htmlspecialchars($pageCss) ?>">
     <?php endif; ?>
     <script src="<?= htmlspecialchars($baseUrl) ?>/script.js" defer></script>
 </head>
@@ -56,7 +56,7 @@ if (!isset($baseUrl)) {
                     <a href="#" class="nav-link">Manage</a>
                     <div class="dropdown-menu">
                         <a href="<?= htmlspecialchars($baseUrl) ?>/item/index.php">Products</a>
-                        <a href="<?= htmlspecialchars($baseUrl) ?>/admin/categories/ind_categories.php">Categories</a>
+                        <a href="<?= htmlspecialchars($baseUrl) ?>/admin/categories/index.php">Categories</a>
                         <a href="<?= htmlspecialchars($baseUrl) ?>/admin/users/ind_users.php">Users</a>
                         <a href="<?= htmlspecialchars($baseUrl) ?>/admin/orders.php">Orders</a>
                         <a href="<?= htmlspecialchars($baseUrl) ?>/admin/reviews/reviews.php">Reviews</a>

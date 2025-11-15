@@ -1,12 +1,9 @@
 <?php
-
-$pageCss = 'index.css';
-include('../includes/customerHeader.php');
-include('../includes/config.php');
+require_once __DIR__ . '/../includes/config.php';
+$baseUrl = rtrim($baseUrl ?? '', '');
+$pageCss = '<link rel="stylesheet" href="' . $baseUrl . '/includes/style/index.css">';
+include __DIR__ . '/../includes/customerHeader.php';
 ?>
-<style>
-<?php include('../includes/style/index.css'); ?>
-</style>
 <link rel="stylesheet" href="../includes/style/hero.css">
 
 <section class="hero">
@@ -14,7 +11,7 @@ include('../includes/config.php');
         <div class="hero-content">
             <h1>DISCOVER ELEGANCE</h1>
             <p>Premium salon essentials curated for the modern professional.</p>
-            <a href="item/index.php" class="btn btn-primary">Shop Now</a>
+            <a href="../customer/product-list.php" class="btn btn-primary">Shop Now</a>
         </div>
     </div>
 </section>
@@ -219,7 +216,7 @@ if (isset($_SESSION["cart_products"]) && count($_SESSION["cart_products"]) > 0) 
     <h3>Who Are We</h3>
     <h1>Your New Go-to for<br>Salon Essentials</h1>
     <p>GlamEssentials Salon Supplies is your trusted local destination for professional hair and beauty products. With everything in stock, we offer fast, reliable island-wide delivery straight to your door.</p>
-    <a href="#products" class="shop-btn">Shop Now</a>
+    <a href="../customer/product-list.php" class="shop-btn">Shop Now</a>
   </div>
 
   <div class="who-image">

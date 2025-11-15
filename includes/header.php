@@ -27,6 +27,8 @@ if (!isset($baseUrl)) {
 </head>
 <body>
 
+<?php include __DIR__ . '/alert.php'; ?>
+
 <!--    🌸 Top Banner -->
 <div class="top-banner">
     <div class="banner-content">

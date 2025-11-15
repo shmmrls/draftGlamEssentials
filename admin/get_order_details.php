@@ -91,15 +91,54 @@ $items_stmt->close();
     margin-bottom: 30px;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
 .section-title {
     font-size: 11px;
     letter-spacing: 1.5px;
     text-transform: uppercase;
     color: rgba(0,0,0,0.7);
     font-weight: 600;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
+    margin: 0;
+}
+
+.btn-email {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #2563eb;
+    border: 1px solid #2563eb;
+    color: #ffffff;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-email:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-email:disabled {
+    background: #9ca3af;
+    border-color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn-email svg {
+    flex-shrink: 0;
 }
 
 .detail-grid {
@@ -315,12 +354,35 @@ $items_stmt->close();
         width: 100%;
         height: 120px;
     }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
 </style>
 
 <!-- Order Information -->
 <div class="order-detail-section">
-    <h3 class="section-title">Order Information</h3>
+    <div class="section-header">
+        <h3 class="section-title">Order Information</h3>
+        <?php if (!empty($order['customer_email'])): ?>
+        <form id="emailForm" method="POST" action="orders.php" style="margin: 0;">
+            <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
+            <input type="hidden" name="send_email" value="1">
+            <button type="submit" class="btn-email">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                Send Email
+            </button>
+        </form>
+        <?php else: ?>
+        <span style="color: #b91c1c; font-size: 12px;">No customer email available</span>
+        <?php endif; ?>
+    </div>
     <div class="detail-grid">
         <div class="detail-item">
             <span class="detail-label">Order ID</span>
@@ -390,10 +452,10 @@ $items_stmt->close();
         <?php while ($item = $items_result->fetch_assoc()): ?>
         <div class="order-item">
             <img 
-                src="../assets/images/products/<?php echo htmlspecialchars($item['main_img_name']); ?>.jpg" 
+                src="../item/products/<?php echo htmlspecialchars($item['main_img_name']); ?>.png" 
                 alt="<?php echo htmlspecialchars($item['product_name']); ?>"
                 class="item-image"
-                onerror="this.src='../assets/images/products/placeholder.jpg'"
+                onerror="this.src='../assets/nopfp.jpg'"
             >
             <div class="item-details">
                 <div class="item-name"><?php echo htmlspecialchars($item['product_name']); ?></div>
@@ -419,14 +481,15 @@ $items_stmt->close();
 <!-- Update Status -->
 <div class="order-detail-section">
     <h3 class="section-title">Update Order Status</h3>
-    <form method="POST" action="orders.php" class="status-form">
+    <form id="orderStatusForm" method="POST" action="orders.php" class="status-form">
         <input type="hidden" name="order_id" value="<?php echo $order['order_id']; ?>">
         <input type="hidden" name="update_status" value="1">
         
         <div class="form-row">
             <div class="form-group-inline">
                 <label for="order_status" class="form-label-inline">Order Status</label>
-                <select id="order_status" name="order_status" class="form-input-inline" required>
+                <select id="order_status" name="order_status" class="form-input-inline">
+                    <option value="">Select Status</option>
                     <option value="Pending" <?php echo $order['order_status'] === 'Pending' ? 'selected' : ''; ?>>Pending</option>
                     <option value="Shipped" <?php echo $order['order_status'] === 'Shipped' ? 'selected' : ''; ?>>Shipped</option>
                     <option value="Delivered" <?php echo $order['order_status'] === 'Delivered' ? 'selected' : ''; ?>>Delivered</option>
@@ -436,10 +499,12 @@ $items_stmt->close();
 
             <div class="form-group-inline">
                 <label for="payment_status" class="form-label-inline">Payment Status</label>
-                <select id="payment_status" name="payment_status" class="form-input-inline" required>
+                <select id="payment_status" name="payment_status" class="form-input-inline">
+                    <option value="">Select Status</option>
                     <option value="Pending" <?php echo $order['payment_status'] === 'Pending' ? 'selected' : ''; ?>>Pending</option>
                     <option value="Paid" <?php echo $order['payment_status'] === 'Paid' ? 'selected' : ''; ?>>Paid</option>
                     <option value="Refunded" <?php echo $order['payment_status'] === 'Refunded' ? 'selected' : ''; ?>>Refunded</option>
+                    <option value="Cancelled" <?php echo $order['payment_status'] === 'Cancelled' ? 'selected' : ''; ?>>Cancelled</option>
                 </select>
             </div>
         </div>
@@ -452,3 +517,65 @@ $items_stmt->close();
         </button>
     </form>
 </div>
+
+<script>
+// Disable HTML5 validation
+document.getElementById('orderStatusForm').setAttribute('novalidate', 'novalidate');
+
+// Form validation for status update
+document.getElementById('orderStatusForm').addEventListener('submit', function(e) {
+    let isValid = true;
+    const orderStatus = document.getElementById('order_status');
+    const paymentStatus = document.getElementById('payment_status');
+    
+    // Clear previous errors
+    document.querySelectorAll('.error-message').forEach(el => el.remove());
+    document.querySelectorAll('.form-input-inline').forEach(el => {
+        el.style.borderColor = 'rgba(0,0,0,0.15)';
+    });
+    
+    // Validate order status
+    if (orderStatus.value === '') {
+        showValidationError(orderStatus, 'Please select an order status');
+        isValid = false;
+    }
+    
+    // Validate payment status
+    if (paymentStatus.value === '') {
+        showValidationError(paymentStatus, 'Please select a payment status');
+        isValid = false;
+    }
+    
+    if (!isValid) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+
+// Email form submission handler
+document.getElementById('emailForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const button = this.querySelector('.btn-email');
+    const originalContent = button.innerHTML;
+    
+    // Disable button and show loading
+    button.disabled = true;
+    button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" opacity="0.3"/><path d="M12 2 A10 10 0 0 1 22 12" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/></path></svg> Sending...';
+    
+    // Submit form
+    this.submit();
+});
+
+function showValidationError(input, message) {
+    input.style.borderColor = '#b91c1c';
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.textContent = message;
+    errorDiv.style.color = '#b91c1c';
+    errorDiv.style.fontSize = '12px';
+    errorDiv.style.marginTop = '5px';
+    errorDiv.style.textAlign = 'left';
+    input.parentNode.appendChild(errorDiv);
+}
+</script>

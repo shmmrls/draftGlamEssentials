@@ -220,7 +220,7 @@ include __DIR__ . '/includes/header.php';
         <div class="breadcrumb">
             <a href="<?php echo $baseUrl; ?>/index.php">Home</a>
             <span class="separator">/</span>
-            <a href="<?php echo $baseUrl; ?>/shop.php">Shop</a>
+            <a href="<?php echo $baseUrl; ?>/product-list.php">Shop</a>
             <span class="separator">/</span>
             <span><?php echo htmlspecialchars($product['product_name']); ?></span>
         </div>
